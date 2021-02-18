@@ -12,6 +12,9 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "USERS", schema = "quora")
+@NamedQueries({
+        @NamedQuery(name = "userByName", query = "select u from UserEntity u where u.username = :username")
+})
 public class UserEntity implements Serializable {
 
     @Id
@@ -54,26 +57,21 @@ public class UserEntity implements Serializable {
     private String salt;
 
     @Column(name = "COUNTRY")
-    @NotNull
     @Size(max = 30)
     private String country;
 
     @Column(name = "ABOUTME")
-    @NotNull
     @Size(max = 50)
     private String aboutme;
 
     @Column(name = "DOB")
-    @NotNull
     @Size(max = 30)
     private String dob;
 
     @Column(name = "ROLE")
-    @Size(max = 30)
     private String role;
 
     @Column(name = "CONTACTNUMBER")
-    @NotNull
     @Size(max = 30)
     private String contactnumber;
 

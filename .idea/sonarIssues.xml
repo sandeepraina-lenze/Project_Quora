@@ -13,12 +13,27 @@
             <set />
           </value>
         </entry>
+        <entry key="$USER_HOME$/Downloads/solution9/technical-service/src/main/java/com/upgrad/technical/service/dao/UserDao.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$USER_HOME$/Downloads/solution9/technical-service/src/main/java/com/upgrad/technical/service/entity/UserAuthTokenEntity.java">
           <value>
             <set />
           </value>
         </entry>
+        <entry key="$USER_HOME$/Downloads/solution9/technical-service/src/main/java/com/upgrad/technical/service/entity/UserEntity.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/quora-api/src/main/java/com/upgrad/quora/api/controller/AuthenticationController.java">
           <value>
             <set />
           </value>
@@ -63,7 +78,22 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/quora-api/target/generated-sources/io/swagger/configuration/HomeController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/quora-db/src/main/resources/config/localhost.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/business/AuthenticationService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/business/JwtTokenProvider.java">
           <value>
             <set />
           </value>

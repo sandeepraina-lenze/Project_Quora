@@ -9,7 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.time.OffsetDateTime;
+import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "Answers", schema = "quora")
@@ -31,7 +31,7 @@ public class AnswerEntity implements Serializable {
 
     @Column(name = "DATE")
     @NotNull
-    private OffsetDateTime date;
+    private ZonedDateTime date;
 
     @ManyToOne
     @JoinColumn(name = "USER_ID")
@@ -65,11 +65,11 @@ public class AnswerEntity implements Serializable {
         this.ans = ans;
     }
 
-    public OffsetDateTime getDate() {
+    public ZonedDateTime getDate() {
         return date;
     }
 
-    public void setDate(OffsetDateTime date) {
+    public void setDate(ZonedDateTime date) {
         this.date = date;
     }
 
