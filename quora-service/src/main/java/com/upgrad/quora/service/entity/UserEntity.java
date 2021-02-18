@@ -11,9 +11,10 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "USERS", schema = "quora")
+@Table(name = "users")
 @NamedQueries({
-        @NamedQuery(name = "userByName", query = "select u from UserEntity u where u.username = :username")
+        @NamedQuery(name = "userByName", query = "select u from UserEntity u where u.username = :username"),
+        @NamedQuery(name = "userByEmail", query = "select u from UserEntity u where u.email = :email")
 })
 public class UserEntity implements Serializable {
 
@@ -26,17 +27,17 @@ public class UserEntity implements Serializable {
     @Size(max = 200)
     private String uuid;
 
-    @Column(name = "FIRST_NAME")
+    @Column(name = "FIRSTNAME")
     @NotNull
     @Size(max = 30)
     private String firstname;
 
-    @Column(name = "LAST_NAME")
+    @Column(name = "LASTNAME")
     @NotNull
     @Size(max = 30)
     private String lastname;
 
-    @Column(name = "USER_NAME")
+    @Column(name = "USERNAME")
     @NotNull
     @Size(max = 30)
     private String username;

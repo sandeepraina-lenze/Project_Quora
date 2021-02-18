@@ -27,6 +27,14 @@ public class UserDao {
         }
     }
 
+    public UserEntity getUserByEmail(final String email) {
+        try {
+            return entityManager.createNamedQuery("userByEmail", UserEntity.class).setParameter("email", email).getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        }
+    }
+
     public UserAuthEntity createAuthToken(final UserAuthEntity userAuthEntity) {
         entityManager.persist(userAuthEntity);
         return userAuthEntity;

@@ -4,6 +4,7 @@ import com.upgrad.quora.api.model.SignupUserRequest;
 import com.upgrad.quora.api.model.SignupUserResponse;
 import com.upgrad.quora.service.business.SignupBusinessService;
 import com.upgrad.quora.service.entity.UserEntity;
+import com.upgrad.quora.service.exception.SignUpRestrictedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,7 +23,7 @@ public class SignupController {
     private SignupBusinessService signupBusinessService;
 
     @RequestMapping(method = RequestMethod.POST, path = "/user/signup", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<SignupUserResponse> userSignup(final SignupUserRequest signupUserRequest) {
+    public ResponseEntity<SignupUserResponse> userSignup(final SignupUserRequest signupUserRequest) throws SignUpRestrictedException {
 
         final UserEntity userEntity = new UserEntity();
 
@@ -36,7 +37,7 @@ public class SignupController {
         userEntity.setCountry(signupUserRequest.getCountry());
         userEntity.setAboutme(signupUserRequest.getAboutMe());
         userEntity.setDob(signupUserRequest.getDob());
-        userEntity.setRole("Admin");
+        userEntity.setRole("nonadmin");
         userEntity.setContactnumber(signupUserRequest.getContactNumber());
 
         final UserEntity createdUserEntity = signupBusinessService.signup(userEntity);
