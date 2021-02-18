@@ -13,9 +13,6 @@ import java.time.OffsetDateTime;
 
 @Entity
 @Table(name = "USER_AUTH", schema = "quora")
-@NamedQueries({
-        @NamedQuery(name = "userAuthByAccessToken", query = "select ut from UserAuthEntity ut where ut.accessToken =:accessToken")
-})
 public class UserAuthEntity implements Serializable {
 
     @Id

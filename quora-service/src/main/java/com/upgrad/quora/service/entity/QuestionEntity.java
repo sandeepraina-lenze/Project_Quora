@@ -13,10 +13,6 @@ import java.time.OffsetDateTime;
 
 @Entity
 @Table(name = "QUESTIONS", schema = "quora")
-@NamedQueries({
-        @NamedQuery(name = "QuestionEntityByUuid", query = "select i from QuestionEntity i where i.uuid = :uuid"),
-        @NamedQuery(name = "QuestionEntityByid", query = "select i from QuestionEntity i where i.id = :id")
-})
 public class QuestionEntity implements Serializable {
 
     @Id

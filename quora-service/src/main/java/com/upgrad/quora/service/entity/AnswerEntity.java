@@ -12,11 +12,7 @@ import java.io.Serializable;
 import java.time.OffsetDateTime;
 
 @Entity
-@Table(name = "QUESTIONS", schema = "quora")
-@NamedQueries({
-        @NamedQuery(name = "QuestionEntityByUuid", query = "select i from QuestionEntity i where i.uuid = :uuid"),
-        @NamedQuery(name = "QuestionEntityByid", query = "select i from QuestionEntity i where i.id = :id")
-})
+@Table(name = "Answers", schema = "quora")
 public class AnswerEntity implements Serializable {
 
     @Id
@@ -108,4 +104,3 @@ public class AnswerEntity implements Serializable {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 }
-

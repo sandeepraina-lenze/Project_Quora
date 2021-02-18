@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.ZonedDateTime;
 import java.util.UUID;
 
 @RestController
@@ -28,13 +27,17 @@ public class SignupController {
         final UserEntity userEntity = new UserEntity();
 
         userEntity.setUuid(UUID.randomUUID().toString());
-        userEntity.setFirstName(signupUserRequest.getFirstName());
-        userEntity.setLastName(signupUserRequest.getLastName());
+        userEntity.setFirstname(signupUserRequest.getFirstName());
+        userEntity.setLastname(signupUserRequest.getLastName());
+        userEntity.setUsername(signupUserRequest.getUserName());
         userEntity.setEmail(signupUserRequest.getEmailAddress());
         userEntity.setPassword(signupUserRequest.getPassword());
-        userEntity.setMobilePhone(signupUserRequest.getMobileNumber());
         userEntity.setSalt("1234abc");
-        userEntity.setRole("nonadmin");
+        userEntity.setCountry(signupUserRequest.getCountry());
+        userEntity.setAboutme(signupUserRequest.getAboutMe());
+        userEntity.setDob(signupUserRequest.getDob());
+        userEntity.setRole("Admin");
+        userEntity.setContactnumber(signupUserRequest.getContactNumber());
 
         final UserEntity createdUserEntity = signupBusinessService.signup(userEntity);
         SignupUserResponse userResponse = new SignupUserResponse().id(createdUserEntity.getUuid()).status("USER SUCCESSFULLY REGISTERED");
