@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.io.UnsupportedEncodingException;
 import java.util.Base64;
 
 @RestController
@@ -23,8 +25,10 @@ public class AuthenticationController {
     private AuthenticationService authenticationService;
 
     @RequestMapping(method = RequestMethod.POST, path = "/user/signin", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<SigninResponse> login(@RequestHeader("authorization") final String authorization) throws AuthenticationFailedException {
-        byte[] decode = Base64.getDecoder().decode(authorization);
+    public ResponseEntity<SigninResponse> login(@RequestHeader("authorization") final String authorization) throws AuthenticationFailedException, UnsupportedEncodingException {
+        String[] decodeAuthorization = authorization.split("Basic ");
+
+        byte[] decode = Base64.getDecoder().decode(decodeAuthorization[1]);
         String decodedText = new String(decode);
         String[] decodedArray = decodedText.split(":");
 
