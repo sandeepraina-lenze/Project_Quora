@@ -36,7 +36,7 @@ public class AuthenticationService {
             final ZonedDateTime expiresAt = now.plusHours(8);
 
             userAuthTokenEntity.setAccessToken(jwtTokenProvider.generateToken(userEntity.getUuid(), now, expiresAt));
-
+            userAuthTokenEntity.setUuid(userEntity.getUuid());
             userAuthTokenEntity.setLogin_at(now);
             userAuthTokenEntity.setExpires_at(expiresAt);
 
