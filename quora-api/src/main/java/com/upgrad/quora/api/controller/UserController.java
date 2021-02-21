@@ -70,7 +70,7 @@ public class UserController {
         String decodedText = new String(decode);
         String[] decodedArray = decodedText.split(":");
 
-        final UserAuthEntity userAuthToken = userBusinessService.sigIn(decodedArray[0], decodedArray[1]);
+        final UserAuthEntity userAuthToken = userBusinessService.signIn(decodedArray[0], decodedArray[1]);
         final UserEntity user = userAuthToken.getUser();
 
         SigninResponse authorizedUserResponse = new SigninResponse().id(user.getUuid())
