@@ -38,7 +38,7 @@ public class CommonBussinessService {
             throw new AuthorizationFailedException("ATHR-002", "User is signed out.Sign in first to get user details");
         }
 
-        if (userEntity.getUuid() != userId) {
+        if (!userEntity.getUuid().equals(userId)) {
             throw new UserNotFoundException("USR-001", "User with entered uuid does not exist");
         }
 

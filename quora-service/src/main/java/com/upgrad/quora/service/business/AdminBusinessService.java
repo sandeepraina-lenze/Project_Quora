@@ -42,7 +42,7 @@ public class AdminBusinessService {
             throw new AuthorizationFailedException("ATHR-003", "Unauthorized Access, Entered user is not an admin");
         }
 
-        if (userEntity.getUuid() != userId) {
+        if (!userEntity.getUuid().equals(userId)) {
             throw new UserNotFoundException("USR-001", "User with entered uuid does not exist");
         }
 
