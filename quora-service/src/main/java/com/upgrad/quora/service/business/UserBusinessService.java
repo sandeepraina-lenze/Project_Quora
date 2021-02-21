@@ -22,7 +22,7 @@ public class UserBusinessService {
     private PasswordCryptographyProvider CryptographyProvider;
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public UserAuthEntity sigin(final String username, final String password) throws AuthenticationFailedException {
+    public UserAuthEntity sigIn(final String username, final String password) throws AuthenticationFailedException {
         UserEntity userEntity = userDao.getUserByName(username);
         if (userEntity == null) {
             throw new AuthenticationFailedException("ATH-001", "This username does not exist");
@@ -51,7 +51,7 @@ public class UserBusinessService {
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public UserAuthEntity signout(final String accessToken) throws SignOutRestrictedException {
+    public UserAuthEntity signOut(final String accessToken) throws SignOutRestrictedException {
         UserAuthEntity userAuthEntity = userDao.getUserByAccessToken(accessToken);
 
         if (userAuthEntity == null) {
@@ -66,7 +66,7 @@ public class UserBusinessService {
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public UserEntity signup(UserEntity userEntity) throws SignUpRestrictedException {
+    public UserEntity signUp(UserEntity userEntity) throws SignUpRestrictedException {
         UserEntity isUserNameAvailable = userDao.getUserByName(userEntity.getUsername());
         UserEntity isUserEmailAvailable = userDao.getUserByEmail(userEntity.getEmail());
 
