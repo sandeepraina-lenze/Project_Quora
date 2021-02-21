@@ -20,7 +20,7 @@ public class SignOutController {
     @Autowired
     private SignoutBusinessService signoutBusinessService;
 
-    @RequestMapping(method = RequestMethod.POST, path = "/user/signout", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(method = RequestMethod.POST, path = "/user/signout", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<SignoutResponse> logout(@RequestHeader("authorization") final String accessToken) throws SignOutRestrictedException {
 
         UserAuthEntity userAuthEntity = signoutBusinessService.signout(accessToken);
