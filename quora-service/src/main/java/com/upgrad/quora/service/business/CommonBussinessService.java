@@ -15,6 +15,16 @@ public class CommonBussinessService {
     @Autowired
     UserDao userDao;
 
+    /**
+     * This method helps to fetch details of any user
+     *
+     * @param userId uuid of the user
+     * @param accessToken access token of the signed in user
+     *
+     * @return user details of the user provided
+     * @throws AuthorizationFailedException if user is not signed-in or user is signed out
+     * @throws UserNotFoundException if user does not exist
+     */
     @Transactional(propagation = Propagation.REQUIRED)
     public UserEntity UserProfileEntity(final String userId, final  String accessToken) throws AuthorizationFailedException, UserNotFoundException {
         UserAuthEntity userAuthEntity = userDao.getUserByAccessToken(accessToken);

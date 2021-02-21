@@ -15,6 +15,16 @@ public class AdminBusinessService {
     @Autowired
     private UserDao userDao;
 
+    /**
+     * This method helps to delete the user
+     *
+     * @param userId uuid of the user
+     * @param accessToken access token of the signed in user
+     *
+     * @return user details of the user deleted
+     * @throws AuthorizationFailedException if user is not signed-in or user is signed out or user role is non-admin
+     * @throws UserNotFoundException if user does not exist
+     */
     @Transactional(propagation = Propagation.REQUIRED)
     public UserEntity UserDelete(final String userId, final  String accessToken) throws AuthorizationFailedException, UserNotFoundException {
         UserAuthEntity userAuthEntity = userDao.getUserByAccessToken(accessToken);
