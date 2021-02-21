@@ -1,0 +1,74 @@
+-------------------------------------------------------------------------------
+Test set: com.upgrad.quora.api.controller.QuestionControllerTest
+-------------------------------------------------------------------------------
+Tests run: 16, Failures: 16, Errors: 0, Skipped: 0, Time elapsed: 34.876 s <<< FAILURE! - in com.upgrad.quora.api.controller.QuestionControllerTest
+getAllQuestionsWithSignedOutUser(com.upgrad.quora.api.controller.QuestionControllerTest)  Time elapsed: 1.615 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<403> but was:<404>
+	at com.upgrad.quora.api.controller.QuestionControllerTest.getAllQuestionsWithSignedOutUser(QuestionControllerTest.java:62)
+
+deleteQuestionWithSignedOutUser(com.upgrad.quora.api.controller.QuestionControllerTest)  Time elapsed: 1.669 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<403> but was:<404>
+	at com.upgrad.quora.api.controller.QuestionControllerTest.deleteQuestionWithSignedOutUser(QuestionControllerTest.java:110)
+
+deleteQuestionWithoutOwnership(com.upgrad.quora.api.controller.QuestionControllerTest)  Time elapsed: 1.745 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<403> but was:<404>
+	at com.upgrad.quora.api.controller.QuestionControllerTest.deleteQuestionWithoutOwnership(QuestionControllerTest.java:118)
+
+createQuestionWithSignedOutUser(com.upgrad.quora.api.controller.QuestionControllerTest)  Time elapsed: 1.815 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<403> but was:<404>
+	at com.upgrad.quora.api.controller.QuestionControllerTest.createQuestionWithSignedOutUser(QuestionControllerTest.java:39)
+
+getAllQuestionsByUserWithNonExistingAccessToken(com.upgrad.quora.api.controller.QuestionControllerTest)  Time elapsed: 1.861 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<403> but was:<404>
+	at com.upgrad.quora.api.controller.QuestionControllerTest.getAllQuestionsByUserWithNonExistingAccessToken(QuestionControllerTest.java:135)
+
+getAllQuestionsForNonExistingUser(com.upgrad.quora.api.controller.QuestionControllerTest)  Time elapsed: 1.997 s  <<< FAILURE!
+java.lang.AssertionError: No value at JSON path "code"
+	at com.upgrad.quora.api.controller.QuestionControllerTest.getAllQuestionsForNonExistingUser(QuestionControllerTest.java:152)
+Caused by: java.lang.IllegalArgumentException: json can not be null or empty
+	at com.upgrad.quora.api.controller.QuestionControllerTest.getAllQuestionsForNonExistingUser(QuestionControllerTest.java:152)
+
+createQuestionWithNonExistingAccessToken(com.upgrad.quora.api.controller.QuestionControllerTest)  Time elapsed: 2.041 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<403> but was:<404>
+	at com.upgrad.quora.api.controller.QuestionControllerTest.createQuestionWithNonExistingAccessToken(QuestionControllerTest.java:31)
+
+editQuestionWithWithSignedOutUser(com.upgrad.quora.api.controller.QuestionControllerTest)  Time elapsed: 2.312 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<403> but was:<404>
+	at com.upgrad.quora.api.controller.QuestionControllerTest.editQuestionWithWithSignedOutUser(QuestionControllerTest.java:78)
+
+editQuestionWithNonExistingAccessToken(com.upgrad.quora.api.controller.QuestionControllerTest)  Time elapsed: 2.238 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<403> but was:<404>
+	at com.upgrad.quora.api.controller.QuestionControllerTest.editQuestionWithNonExistingAccessToken(QuestionControllerTest.java:70)
+
+deleteQuestionWithNonExistingAccessToken(com.upgrad.quora.api.controller.QuestionControllerTest)  Time elapsed: 2.219 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<403> but was:<404>
+	at com.upgrad.quora.api.controller.QuestionControllerTest.deleteQuestionWithNonExistingAccessToken(QuestionControllerTest.java:102)
+
+editQuestionWithoutOwnership(com.upgrad.quora.api.controller.QuestionControllerTest)  Time elapsed: 2.388 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<403> but was:<404>
+	at com.upgrad.quora.api.controller.QuestionControllerTest.editQuestionWithoutOwnership(QuestionControllerTest.java:86)
+
+deleteNoneExistingQuestion(com.upgrad.quora.api.controller.QuestionControllerTest)  Time elapsed: 2.374 s  <<< FAILURE!
+java.lang.AssertionError: No value at JSON path "code"
+	at com.upgrad.quora.api.controller.QuestionControllerTest.deleteNoneExistingQuestion(QuestionControllerTest.java:128)
+Caused by: java.lang.IllegalArgumentException: json can not be null or empty
+	at com.upgrad.quora.api.controller.QuestionControllerTest.deleteNoneExistingQuestion(QuestionControllerTest.java:128)
+
+getAllQuestionsByUserWithSignedOutUser(com.upgrad.quora.api.controller.QuestionControllerTest)  Time elapsed: 2.454 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<403> but was:<404>
+	at com.upgrad.quora.api.controller.QuestionControllerTest.getAllQuestionsByUserWithSignedOutUser(QuestionControllerTest.java:143)
+
+editNonExistingQuestion(com.upgrad.quora.api.controller.QuestionControllerTest)  Time elapsed: 2.512 s  <<< FAILURE!
+java.lang.AssertionError: No value at JSON path "code"
+	at com.upgrad.quora.api.controller.QuestionControllerTest.editNonExistingQuestion(QuestionControllerTest.java:95)
+Caused by: java.lang.IllegalArgumentException: json can not be null or empty
+	at com.upgrad.quora.api.controller.QuestionControllerTest.editNonExistingQuestion(QuestionControllerTest.java:95)
+
+getAllQuestions(com.upgrad.quora.api.controller.QuestionControllerTest)  Time elapsed: 2.692 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<200> but was:<404>
+	at com.upgrad.quora.api.controller.QuestionControllerTest.getAllQuestions(QuestionControllerTest.java:47)
+
+getAllQuestionsWithNonExistingAccessToken(com.upgrad.quora.api.controller.QuestionControllerTest)  Time elapsed: 2.625 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<403> but was:<404>
+	at com.upgrad.quora.api.controller.QuestionControllerTest.getAllQuestionsWithNonExistingAccessToken(QuestionControllerTest.java:54)
+

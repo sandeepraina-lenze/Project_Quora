@@ -29,18 +29,9 @@ public class UserController {
     @Autowired
     private UserBusinessService userBusinessService;
 
-    /**
-     * This api endpoint is used to signup a new user
-     *
-     * @param signupUserRequest - user details for signup new user in SignupUserRequest model
-     *
-     * @return JSON response with user uuid and message
-     *
-     * @throws SignUpRestrictedException if username or email id already exists
-     */
-    @RequestMapping(method = RequestMethod.POST, path = "/user/signup", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<SignupUserResponse> signUp(final SignupUserRequest signupUserRequest) throws SignUpRestrictedException {
 
+    @RequestMapping(method = RequestMethod.POST, path = "/user/signup", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<SignupUserResponse> signUp(final SignupUserRequest signupUserRequest) throws SignUpRestrictedException, SignUpRestrictedException {
         final UserEntity userEntity = new UserEntity();
 
         userEntity.setUuid(UUID.randomUUID().toString());
@@ -61,46 +52,26 @@ public class UserController {
         return new ResponseEntity<SignupUserResponse>(userResponse, HttpStatus.CREATED);
     }
 
-    /**
-     * This api endpoint is used to signout the user
-     *
-     * @RequestHeader accessToken - access token of the signed in user in authorization request header
-     *
-     * @return JSON response with user uuid and message
-     *
-     * @throws SignOutRestrictedException if user is not signed in
-     */
     @RequestMapping(method = RequestMethod.POST, path = "/user/signout", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<SignoutResponse> signOut(@RequestHeader("authorization") final String accessToken) throws SignOutRestrictedException {
-
-        UserAuthEntity userAuthEntity = userBusinessService.signOut(accessToken);
-        UserEntity userEntity = userAuthEntity.getUser();
+    public ResponseEntity<SignoutResponse> signOut(@RequestHeader("authorization") final String accessToken) throws SignOutRestrictedException, SignOutRestrictedException {
+        final UserAuthEntity userAuthEntity = userBusinessService.signOut(accessToken);
+        final UserEntity userEntity = userAuthEntity.getUser();
 
         SignoutResponse signoutResponse = new SignoutResponse().id(userEntity.getUuid())
                 .message("SIGNED OUT SUCCESSFULLY");
         return new ResponseEntity<SignoutResponse>(signoutResponse, HttpStatus.OK);
     }
 
-    /**
-     * This api endpoint is used to signin the user
-     *
-     * @RequestHeader accessToken - user credentials as a part of Basic authentication and to pass as "Basic username:password" (where username:password of the String is encoded to Base64 format)
-     *
-     * @return JSON response with user uuid and message
-     *
-     * @throws AuthenticationFailedException if username does not exist or password provided does not match
-     * */
     @RequestMapping(method = RequestMethod.POST, path = "/user/signin", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<SigninResponse> signIn(@RequestHeader("authorization") final String authorization) throws AuthenticationFailedException {
+    public ResponseEntity<SigninResponse> signIn(@RequestHeader("authorization") final String authorization) throws AuthenticationFailedException, AuthenticationFailedException {
         String[] decodeAuthorization = authorization.split("Basic ");
 
         byte[] decode = Base64.getDecoder().decode(decodeAuthorization[1]);
         String decodedText = new String(decode);
         String[] decodedArray = decodedText.split(":");
 
-        UserAuthEntity userAuthToken = userBusinessService.signIn(decodedArray[0], decodedArray[1]);
-
-        UserEntity user = userAuthToken.getUser();
+        final UserAuthEntity userAuthToken = userBusinessService.signIn(decodedArray[0], decodedArray[1]);
+        final UserEntity user = userAuthToken.getUser();
 
         SigninResponse authorizedUserResponse = new SigninResponse().id(user.getUuid())
                 .message("SIGNED IN SUCCESSFULLY");
