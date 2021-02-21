@@ -34,14 +34,6 @@ public class AnswerDao {
         }
     }
 
-    /**
-     * updates the row of information in answer table of DB.
-     *
-     * @param answerEntity answer to be updated.
-     */
-    public void updateAnswer(AnswerEntity answerEntity) {
-        entityManager.merge(answerEntity);
-    }
 
     /**
      * Delete a answer by given answerId from the DB.
@@ -55,5 +47,14 @@ public class AnswerDao {
             entityManager.remove(deleteAnswer);
         }
         return deleteAnswer;
+    }
+
+    /**
+     * updates the row of information in answer table of DB.
+     *
+     * @param answerEntity answer to be updated.
+     */
+    public void updateAnswer(AnswerEntity answerEntity) {
+        entityManager.merge(answerEntity);
     }
 }
