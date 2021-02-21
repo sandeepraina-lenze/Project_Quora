@@ -21,8 +21,16 @@ public class UserBusinessService {
     @Autowired
     private PasswordCryptographyProvider CryptographyProvider;
 
+    /**
+     * This method helps to signin a user
+     *
+     * @param username username of a user
+     * @param password password of a user
+     * @return authorized user entity
+     * @throws AuthenticationFailedException if username does not exist or password provided does not match
+     */
     @Transactional(propagation = Propagation.REQUIRED)
-    public UserAuthEntity sigIn(final String username, final String password) throws AuthenticationFailedException {
+    public UserAuthEntity signIn(final String username, final String password) throws AuthenticationFailedException {
         UserEntity userEntity = userDao.getUserByName(username);
         if (userEntity == null) {
             throw new AuthenticationFailedException("ATH-001", "This username does not exist");
@@ -50,6 +58,13 @@ public class UserBusinessService {
         }
     }
 
+    /**
+     * This method helps to signout a user
+     *
+     * @param accesstoken access token of the signed in user
+     * @return updated authorized user entity
+     * @throws SignOutRestrictedException if user is not signed in
+     */
     @Transactional(propagation = Propagation.REQUIRED)
     public UserAuthEntity signOut(final String accessToken) throws SignOutRestrictedException {
         UserAuthEntity userAuthEntity = userDao.getUserByAccessToken(accessToken);
@@ -65,6 +80,13 @@ public class UserBusinessService {
         return userAuthEntity;
     }
 
+    /**
+     * This method helps to signup a new user
+     *
+     * @param userEntity details of the user
+     * @return created user entity
+     * @throws SignUpRestrictedException if username or email id already exists
+     */
     @Transactional(propagation = Propagation.REQUIRED)
     public UserEntity signUp(UserEntity userEntity) throws SignUpRestrictedException {
         UserEntity isUserNameAvailable = userDao.getUserByName(userEntity.getUsername());
