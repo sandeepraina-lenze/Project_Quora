@@ -32,7 +32,6 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.POST, path = "/user/signup", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<SignupUserResponse> signUp(final SignupUserRequest signupUserRequest) throws SignUpRestrictedException, SignUpRestrictedException {
-
         final UserEntity userEntity = new UserEntity();
 
         userEntity.setUuid(UUID.randomUUID().toString());
@@ -55,9 +54,8 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.POST, path = "/user/signout", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<SignoutResponse> signOut(@RequestHeader("authorization") final String accessToken) throws SignOutRestrictedException, SignOutRestrictedException {
-
-        UserAuthEntity userAuthEntity = userBusinessService.signOut(accessToken);
-        UserEntity userEntity = userAuthEntity.getUser();
+        final UserAuthEntity userAuthEntity = userBusinessService.signOut(accessToken);
+        final UserEntity userEntity = userAuthEntity.getUser();
 
         SignoutResponse signoutResponse = new SignoutResponse().id(userEntity.getUuid())
                 .message("SIGNED OUT SUCCESSFULLY");
@@ -72,9 +70,8 @@ public class UserController {
         String decodedText = new String(decode);
         String[] decodedArray = decodedText.split(":");
 
-        UserAuthEntity userAuthToken = userBusinessService.sigIn(decodedArray[0], decodedArray[1]);
-
-        UserEntity user = userAuthToken.getUser();
+        final UserAuthEntity userAuthToken = userBusinessService.sigIn(decodedArray[0], decodedArray[1]);
+        final UserEntity user = userAuthToken.getUser();
 
         SigninResponse authorizedUserResponse = new SigninResponse().id(user.getUuid())
                 .message("SIGNED IN SUCCESSFULLY");
