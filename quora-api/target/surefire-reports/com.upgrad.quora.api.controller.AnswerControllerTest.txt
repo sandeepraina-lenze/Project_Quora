@@ -1,64 +1,68 @@
 -------------------------------------------------------------------------------
 Test set: com.upgrad.quora.api.controller.AnswerControllerTest
 -------------------------------------------------------------------------------
-Tests run: 14, Failures: 14, Errors: 0, Skipped: 0, Time elapsed: 13.081 s <<< FAILURE! - in com.upgrad.quora.api.controller.AnswerControllerTest
-deleteAnswerWithNonExistingAccessToken(com.upgrad.quora.api.controller.AnswerControllerTest)  Time elapsed: 0.335 s  <<< FAILURE!
-java.lang.AssertionError: Status expected:<403> but was:<404>
-	at com.upgrad.quora.api.controller.AnswerControllerTest.deleteAnswerWithNonExistingAccessToken(AnswerControllerTest.java:87)
+Tests run: 14, Failures: 0, Errors: 6, Skipped: 0, Time elapsed: 1.102 s <<< FAILURE! - in com.upgrad.quora.api.controller.AnswerControllerTest
+getAllAnswersToNonExistingQuestion(com.upgrad.quora.api.controller.AnswerControllerTest)  Time elapsed: 0.083 s  <<< ERROR!
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.springframework.dao.InvalidDataAccessApiUsageException: Type specified for TypedQuery [com.upgrad.quora.service.entity.QuestionEntity] is incompatible with query return type [class com.upgrad.quora.service.entity.UserAuthEntity]; nested exception is java.lang.IllegalArgumentException: Type specified for TypedQuery [com.upgrad.quora.service.entity.QuestionEntity] is incompatible with query return type [class com.upgrad.quora.service.entity.UserAuthEntity]
+	at com.upgrad.quora.api.controller.AnswerControllerTest.getAllAnswersToNonExistingQuestion(AnswerControllerTest.java:134)
+Caused by: org.springframework.dao.InvalidDataAccessApiUsageException: Type specified for TypedQuery [com.upgrad.quora.service.entity.QuestionEntity] is incompatible with query return type [class com.upgrad.quora.service.entity.UserAuthEntity]; nested exception is java.lang.IllegalArgumentException: Type specified for TypedQuery [com.upgrad.quora.service.entity.QuestionEntity] is incompatible with query return type [class com.upgrad.quora.service.entity.UserAuthEntity]
+	at com.upgrad.quora.api.controller.AnswerControllerTest.getAllAnswersToNonExistingQuestion(AnswerControllerTest.java:134)
+Caused by: java.lang.IllegalArgumentException: Type specified for TypedQuery [com.upgrad.quora.service.entity.QuestionEntity] is incompatible with query return type [class com.upgrad.quora.service.entity.UserAuthEntity]
+	at com.upgrad.quora.api.controller.AnswerControllerTest.getAllAnswersToNonExistingQuestion(AnswerControllerTest.java:134)
 
-getAllAnswersToNonExistingQuestion(com.upgrad.quora.api.controller.AnswerControllerTest)  Time elapsed: 0.477 s  <<< FAILURE!
-java.lang.AssertionError: Status expected:<404> but was:<400>
-	at com.upgrad.quora.api.controller.AnswerControllerTest.getAllAnswersToNonExistingQuestion(AnswerControllerTest.java:135)
+createAnswerForNonExistingQuestion(com.upgrad.quora.api.controller.AnswerControllerTest)  Time elapsed: 0.263 s  <<< ERROR!
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.springframework.dao.InvalidDataAccessApiUsageException: Type specified for TypedQuery [com.upgrad.quora.service.entity.QuestionEntity] is incompatible with query return type [class com.upgrad.quora.service.entity.UserAuthEntity]; nested exception is java.lang.IllegalArgumentException: Type specified for TypedQuery [com.upgrad.quora.service.entity.QuestionEntity] is incompatible with query return type [class com.upgrad.quora.service.entity.UserAuthEntity]
+	at com.upgrad.quora.api.controller.AnswerControllerTest.createAnswerForNonExistingQuestion(AnswerControllerTest.java:46)
+Caused by: org.springframework.dao.InvalidDataAccessApiUsageException: Type specified for TypedQuery [com.upgrad.quora.service.entity.QuestionEntity] is incompatible with query return type [class com.upgrad.quora.service.entity.UserAuthEntity]; nested exception is java.lang.IllegalArgumentException: Type specified for TypedQuery [com.upgrad.quora.service.entity.QuestionEntity] is incompatible with query return type [class com.upgrad.quora.service.entity.UserAuthEntity]
+	at com.upgrad.quora.api.controller.AnswerControllerTest.createAnswerForNonExistingQuestion(AnswerControllerTest.java:46)
+Caused by: java.lang.IllegalArgumentException: Type specified for TypedQuery [com.upgrad.quora.service.entity.QuestionEntity] is incompatible with query return type [class com.upgrad.quora.service.entity.UserAuthEntity]
+	at com.upgrad.quora.api.controller.AnswerControllerTest.createAnswerForNonExistingQuestion(AnswerControllerTest.java:46)
 
-getAllAnswersToQuestionWithSignedOutUser(com.upgrad.quora.api.controller.AnswerControllerTest)  Time elapsed: 0.583 s  <<< FAILURE!
-java.lang.AssertionError: Status expected:<403> but was:<400>
-	at com.upgrad.quora.api.controller.AnswerControllerTest.getAllAnswersToQuestionWithSignedOutUser(AnswerControllerTest.java:127)
+deleteAnswerWithoutOwnership(com.upgrad.quora.api.controller.AnswerControllerTest)  Time elapsed: 0.146 s  <<< ERROR!
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.springframework.dao.InvalidDataAccessResourceUsageException: could not extract ResultSet; SQL [n/a]; nested exception is org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at com.upgrad.quora.api.controller.AnswerControllerTest.deleteAnswerWithoutOwnership(AnswerControllerTest.java:110)
+Caused by: org.springframework.dao.InvalidDataAccessResourceUsageException: could not extract ResultSet; SQL [n/a]; nested exception is org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at com.upgrad.quora.api.controller.AnswerControllerTest.deleteAnswerWithoutOwnership(AnswerControllerTest.java:110)
+Caused by: org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at com.upgrad.quora.api.controller.AnswerControllerTest.deleteAnswerWithoutOwnership(AnswerControllerTest.java:110)
+Caused by: org.postgresql.util.PSQLException: 
+ERROR: relation "quora.answers" does not exist
+  Position: 209
+	at com.upgrad.quora.api.controller.AnswerControllerTest.deleteAnswerWithoutOwnership(AnswerControllerTest.java:110)
 
-editAnswerWithNonExistingAccessToken(com.upgrad.quora.api.controller.AnswerControllerTest)  Time elapsed: 0.645 s  <<< FAILURE!
-java.lang.AssertionError: Status expected:<403> but was:<404>
-	at com.upgrad.quora.api.controller.AnswerControllerTest.editAnswerWithNonExistingAccessToken(AnswerControllerTest.java:55)
+deleteNonExistingAnswer(com.upgrad.quora.api.controller.AnswerControllerTest)  Time elapsed: 0.132 s  <<< ERROR!
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.springframework.dao.InvalidDataAccessResourceUsageException: could not extract ResultSet; SQL [n/a]; nested exception is org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at com.upgrad.quora.api.controller.AnswerControllerTest.deleteNonExistingAnswer(AnswerControllerTest.java:102)
+Caused by: org.springframework.dao.InvalidDataAccessResourceUsageException: could not extract ResultSet; SQL [n/a]; nested exception is org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at com.upgrad.quora.api.controller.AnswerControllerTest.deleteNonExistingAnswer(AnswerControllerTest.java:102)
+Caused by: org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at com.upgrad.quora.api.controller.AnswerControllerTest.deleteNonExistingAnswer(AnswerControllerTest.java:102)
+Caused by: org.postgresql.util.PSQLException: 
+ERROR: relation "quora.answers" does not exist
+  Position: 209
+	at com.upgrad.quora.api.controller.AnswerControllerTest.deleteNonExistingAnswer(AnswerControllerTest.java:102)
 
-deleteAnswerWithSignedOutUser(com.upgrad.quora.api.controller.AnswerControllerTest)  Time elapsed: 0.695 s  <<< FAILURE!
-java.lang.AssertionError: Status expected:<403> but was:<404>
-	at com.upgrad.quora.api.controller.AnswerControllerTest.deleteAnswerWithSignedOutUser(AnswerControllerTest.java:95)
+editAnswerWithoutOwnership(com.upgrad.quora.api.controller.AnswerControllerTest)  Time elapsed: 0.159 s  <<< ERROR!
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.springframework.dao.InvalidDataAccessResourceUsageException: could not extract ResultSet; SQL [n/a]; nested exception is org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at com.upgrad.quora.api.controller.AnswerControllerTest.editAnswerWithoutOwnership(AnswerControllerTest.java:78)
+Caused by: org.springframework.dao.InvalidDataAccessResourceUsageException: could not extract ResultSet; SQL [n/a]; nested exception is org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at com.upgrad.quora.api.controller.AnswerControllerTest.editAnswerWithoutOwnership(AnswerControllerTest.java:78)
+Caused by: org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at com.upgrad.quora.api.controller.AnswerControllerTest.editAnswerWithoutOwnership(AnswerControllerTest.java:78)
+Caused by: org.postgresql.util.PSQLException: 
+ERROR: relation "quora.answers" does not exist
+  Position: 209
+	at com.upgrad.quora.api.controller.AnswerControllerTest.editAnswerWithoutOwnership(AnswerControllerTest.java:78)
 
-createAnswerForNonExistingQuestion(com.upgrad.quora.api.controller.AnswerControllerTest)  Time elapsed: 0.76 s  <<< FAILURE!
-java.lang.AssertionError: Status expected:<404> but was:<400>
-	at com.upgrad.quora.api.controller.AnswerControllerTest.createAnswerForNonExistingQuestion(AnswerControllerTest.java:47)
-
-deleteAnswerWithoutOwnership(com.upgrad.quora.api.controller.AnswerControllerTest)  Time elapsed: 1.075 s  <<< FAILURE!
-java.lang.AssertionError: Status expected:<403> but was:<404>
-	at com.upgrad.quora.api.controller.AnswerControllerTest.deleteAnswerWithoutOwnership(AnswerControllerTest.java:111)
-
-deleteNonExistingAnswer(com.upgrad.quora.api.controller.AnswerControllerTest)  Time elapsed: 1.077 s  <<< FAILURE!
-java.lang.AssertionError: No value at JSON path "code"
-	at com.upgrad.quora.api.controller.AnswerControllerTest.deleteNonExistingAnswer(AnswerControllerTest.java:104)
-Caused by: java.lang.IllegalArgumentException: json can not be null or empty
-	at com.upgrad.quora.api.controller.AnswerControllerTest.deleteNonExistingAnswer(AnswerControllerTest.java:104)
-
-getAllAnswersToQuestionWithNonExistingAccessToken(com.upgrad.quora.api.controller.AnswerControllerTest)  Time elapsed: 1.048 s  <<< FAILURE!
-java.lang.AssertionError: Status expected:<403> but was:<400>
-	at com.upgrad.quora.api.controller.AnswerControllerTest.getAllAnswersToQuestionWithNonExistingAccessToken(AnswerControllerTest.java:119)
-
-editAnswerWithoutOwnership(com.upgrad.quora.api.controller.AnswerControllerTest)  Time elapsed: 1.047 s  <<< FAILURE!
-java.lang.AssertionError: Status expected:<403> but was:<404>
-	at com.upgrad.quora.api.controller.AnswerControllerTest.editAnswerWithoutOwnership(AnswerControllerTest.java:79)
-
-editAnswerWithSignedOutUser(com.upgrad.quora.api.controller.AnswerControllerTest)  Time elapsed: 1.055 s  <<< FAILURE!
-java.lang.AssertionError: Status expected:<403> but was:<404>
-	at com.upgrad.quora.api.controller.AnswerControllerTest.editAnswerWithSignedOutUser(AnswerControllerTest.java:63)
-
-createAnswerWithNonExistingAccessToken(com.upgrad.quora.api.controller.AnswerControllerTest)  Time elapsed: 1.224 s  <<< FAILURE!
-java.lang.AssertionError: Status expected:<403> but was:<400>
-	at com.upgrad.quora.api.controller.AnswerControllerTest.createAnswerWithNonExistingAccessToken(AnswerControllerTest.java:31)
-
-createAnswerWithSignedOutUser(com.upgrad.quora.api.controller.AnswerControllerTest)  Time elapsed: 1.344 s  <<< FAILURE!
-java.lang.AssertionError: Status expected:<403> but was:<400>
-	at com.upgrad.quora.api.controller.AnswerControllerTest.createAnswerWithSignedOutUser(AnswerControllerTest.java:39)
-
-editNonExistingAnswer(com.upgrad.quora.api.controller.AnswerControllerTest)  Time elapsed: 1.433 s  <<< FAILURE!
-java.lang.AssertionError: No value at JSON path "code"
-	at com.upgrad.quora.api.controller.AnswerControllerTest.editNonExistingAnswer(AnswerControllerTest.java:72)
-Caused by: java.lang.IllegalArgumentException: json can not be null or empty
-	at com.upgrad.quora.api.controller.AnswerControllerTest.editNonExistingAnswer(AnswerControllerTest.java:72)
+editNonExistingAnswer(com.upgrad.quora.api.controller.AnswerControllerTest)  Time elapsed: 0.236 s  <<< ERROR!
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.springframework.dao.InvalidDataAccessResourceUsageException: could not extract ResultSet; SQL [n/a]; nested exception is org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at com.upgrad.quora.api.controller.AnswerControllerTest.editNonExistingAnswer(AnswerControllerTest.java:70)
+Caused by: org.springframework.dao.InvalidDataAccessResourceUsageException: could not extract ResultSet; SQL [n/a]; nested exception is org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at com.upgrad.quora.api.controller.AnswerControllerTest.editNonExistingAnswer(AnswerControllerTest.java:70)
+Caused by: org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at com.upgrad.quora.api.controller.AnswerControllerTest.editNonExistingAnswer(AnswerControllerTest.java:70)
+Caused by: org.postgresql.util.PSQLException: 
+ERROR: relation "quora.answers" does not exist
+  Position: 209
+	at com.upgrad.quora.api.controller.AnswerControllerTest.editNonExistingAnswer(AnswerControllerTest.java:70)
 

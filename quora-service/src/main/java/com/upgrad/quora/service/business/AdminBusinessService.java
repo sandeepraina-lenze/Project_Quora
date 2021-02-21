@@ -27,12 +27,13 @@ public class AdminBusinessService {
      */
     @Transactional(propagation = Propagation.REQUIRED)
     public UserEntity UserDelete(final String userId, final  String accessToken) throws AuthorizationFailedException, UserNotFoundException {
-        UserAuthEntity userAuthEntity = userDao.getUserByAccessToken(accessToken);
-        UserEntity userEntity = userAuthEntity.getUser();
+        final UserAuthEntity userAuthEntity = userDao.getUserByAccessToken(accessToken);
 
         if (userAuthEntity == null) {
             throw new AuthorizationFailedException("ATHR-001", "User has not signed in");
         }
+
+        final UserEntity userEntity = userAuthEntity.getUser();
 
         if (userAuthEntity != null && userAuthEntity.getLogout_at() != null) {
             throw new AuthorizationFailedException("ATHR-002", "User is signed out");

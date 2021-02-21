@@ -1,18 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.upgrad.quora.api.controller.AdminControllerTest
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 23.107 s <<< FAILURE! - in com.upgrad.quora.api.controller.AdminControllerTest
-deleteWithnonadminAsRole(com.upgrad.quora.api.controller.AdminControllerTest)  Time elapsed: 1.183 s  <<< FAILURE!
-java.lang.AssertionError: Status expected:<403> but was:<404>
-	at com.upgrad.quora.api.controller.AdminControllerTest.deleteWithnonadminAsRole(AdminControllerTest.java:38)
-
-deleteWithNonExistingAccessToken(com.upgrad.quora.api.controller.AdminControllerTest)  Time elapsed: 0.531 s  <<< FAILURE!
-java.lang.AssertionError: Status expected:<403> but was:<404>
-	at com.upgrad.quora.api.controller.AdminControllerTest.deleteWithNonExistingAccessToken(AdminControllerTest.java:30)
-
-deleteNonExistingUser(com.upgrad.quora.api.controller.AdminControllerTest)  Time elapsed: 0.628 s  <<< FAILURE!
-java.lang.AssertionError: No value at JSON path "code"
-	at com.upgrad.quora.api.controller.AdminControllerTest.deleteNonExistingUser(AdminControllerTest.java:48)
-Caused by: java.lang.IllegalArgumentException: json can not be null or empty
-	at com.upgrad.quora.api.controller.AdminControllerTest.deleteNonExistingUser(AdminControllerTest.java:48)
-
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.079 s - in com.upgrad.quora.api.controller.AdminControllerTest
