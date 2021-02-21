@@ -1,12 +1,16 @@
 package com.upgrad.quora.api.controller;
 
+import com.upgrad.quora.api.model.AnswerDeleteResponse;
 import com.upgrad.quora.api.model.AnswerDetailsResponse;
 import com.upgrad.quora.api.model.AnswerRequest;
 import com.upgrad.quora.api.model.AnswerResponse;
 import com.upgrad.quora.service.business.AnswerBusinessService;
-import com.upgrad.quora.service.dao.*;
+import com.upgrad.quora.service.dao.AnswerDao;
+import com.upgrad.quora.service.dao.QuestionDao;
+import com.upgrad.quora.service.dao.UserDao;
 import com.upgrad.quora.service.entity.AnswerEntity;
 import com.upgrad.quora.service.entity.QuestionEntity;
+import com.upgrad.quora.service.exception.AnswerNotFoundException;
 import com.upgrad.quora.service.exception.AuthorizationFailedException;
 import com.upgrad.quora.service.exception.InvalidQuestionException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +65,7 @@ public class AnswerController {
 
         QuestionEntity questionEntity = questionDao.getQuestionById(questionId);
         for (AnswerEntity answerEntity : answers) {
-            if(answerEntity.getQuestion().equals(questionDao.getQuestionById(questionId))){
+            if (answerEntity.getQuestion().equals(questionDao.getQuestionById(questionId))) {
                 AnswerDetailsResponse answerDetailsResponse = new AnswerDetailsResponse();
                 answerDetailsResponse.setId(answerEntity.getUuid());
                 answerDetailsResponse.setQuestionContent(answerEntity.getQuestion().getContent());
@@ -70,5 +74,14 @@ public class AnswerController {
             }
         }
         return new ResponseEntity<List<AnswerDetailsResponse>>(answerDetailsResponses, HttpStatus.OK);
+    }
+    //delete a answer using answerId
+
+
+    @RequestMapping(method = RequestMethod.DELETE, path = "/answer/delete/{answerId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<AnswerDeleteResponse> deleteAnswer(@PathVariable("answerId") String answerId, @RequestHeader("authorization") final String authorization) throws AuthorizationFailedException, AnswerNotFoundException {
+        AnswerEntity answerEntity = answerBusinessService.deleteAnswer(answerId, authorization);
+        AnswerDeleteResponse answerDeleteResponse = new AnswerDeleteResponse().id(answerEntity.getUuid()).status("ANSWER DELETED");
+        return new ResponseEntity<AnswerDeleteResponse>(answerDeleteResponse, HttpStatus.OK);
     }
 }
