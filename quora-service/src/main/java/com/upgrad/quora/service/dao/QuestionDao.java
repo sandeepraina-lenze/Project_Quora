@@ -24,4 +24,18 @@ public class QuestionDao {
         entityManager.persist(questionEntity);
         return questionEntity;
     }
+
+    /**
+     * This method helps to retrieve question by id
+     *
+     * @param questionId id of the question to be retrieved
+     * @return question entity
+     */
+    public QuestionEntity getQuestionById(final long questionId) {
+        try {
+            return entityManager.createNamedQuery("questionEntityById", QuestionEntity.class).setParameter("uuid", questionId).getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        }
+    }
 }
