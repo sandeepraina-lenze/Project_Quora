@@ -15,7 +15,7 @@ import com.upgrad.quora.service.exception.InvalidQuestionException;
 import com.upgrad.quora.service.exception.AnswerNotFoundException;
 
 @ControllerAdvice
-public class RestExceptionHandler {
+public class RestExceptionHandler extends Exception {
 
     @ExceptionHandler(AuthenticationFailedException.class)
     public ResponseEntity<ErrorResponse> authenticationFailedException(AuthenticationFailedException exe, WebRequest request){
