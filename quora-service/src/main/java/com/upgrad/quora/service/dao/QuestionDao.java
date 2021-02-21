@@ -31,7 +31,7 @@ public class QuestionDao {
      * @param questionId id of the question to be retrieved
      * @return question entity
      */
-    public QuestionEntity getQuestionById(final long questionId) {
+    public QuestionEntity getQuestionById(final String questionId) {
         try {
             return entityManager.createNamedQuery("questionEntityById", QuestionEntity.class).setParameter("uuid", questionId).getSingleResult();
         } catch (NoResultException nre) {

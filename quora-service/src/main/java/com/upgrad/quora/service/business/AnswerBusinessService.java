@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class AnswerBusinessService {
     @Autowired
@@ -25,7 +27,7 @@ public class AnswerBusinessService {
     private QuestionDao questionDao;
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public AnswerEntity createAnswer(AnswerEntity answerEntity, final String authorization, final long questionId) throws AuthorizationFailedException, InvalidQuestionException {
+    public AnswerEntity createAnswer(AnswerEntity answerEntity, final String authorization, final String questionId) throws AuthorizationFailedException, InvalidQuestionException {
         UserAuthEntity userAuthEntity = userDao.getUserByAccessToken(authorization);
         if (userAuthEntity == null) {
             throw new AuthorizationFailedException("ATHR-001", "User has not signed in");
@@ -41,5 +43,20 @@ public class AnswerBusinessService {
         return answerDao.createAnswer(answerEntity);
     }
 
+    public List<AnswerEntity> getAllAnswersToQuestion(final String questionId, final String authorization) throws AuthorizationFailedException, InvalidQuestionException {
+        UserAuthEntity userAuthEntity = userDao.getUserByAccessToken(authorization);
+        if (userAuthEntity == null) {
+            throw new AuthorizationFailedException("ATHR-001", "User has not signed in");
+        } else if (userAuthEntity.getLogout_at() != null) {
+            throw new AuthorizationFailedException("ATHR-002", "User is signed out.Sign in first to get the answers");
+        }
+        QuestionEntity questionEntity = questionDao.getQuestionById(questionId);
+        if (questionEntity == null) {
+            throw new InvalidQuestionException("QUES-001", "The question with entered uuid whose details are to be seen does not exist");
+        }
+        return answerDao.getAllAnswersToQuestion(questionId);
+
     }
+}
+
 

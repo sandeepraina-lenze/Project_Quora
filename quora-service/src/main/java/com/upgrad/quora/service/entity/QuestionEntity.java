@@ -17,6 +17,7 @@ import java.time.ZonedDateTime;
 @Entity
 @Table(name = "question", schema = "quora")
 
+
 public class QuestionEntity implements Serializable {
 
     @Id

@@ -13,6 +13,12 @@ import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "Answers", schema = "quora")
+@NamedQueries({
+        @NamedQuery(name = "ansUuid", query = "select ans from AnswerEntity ans where ans.uuid =:uuid"),
+        //jpql query to get answer on matching uuid
+        @NamedQuery(name = "getAllAnswersToQuestion", query = "select ans from AnswerEntity ans")
+        //jpql query to get all answer, similar to select * from answer entity in SQL
+})
 public class AnswerEntity implements Serializable {
 
     @Id
