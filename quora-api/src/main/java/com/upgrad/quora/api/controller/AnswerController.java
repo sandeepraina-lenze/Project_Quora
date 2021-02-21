@@ -20,14 +20,16 @@ import java.util.UUID;
 public class AnswerController {
     @Autowired
     private AnswerBusinessService answerBusinessService;
+
     @Autowired
     private QuestionDao questionDao;
-    @RequestMapping(method = RequestMethod.POST, path = "/question/{questionId}/answer/create", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<AnswerResponse> createAnswer(final AnswerRequest answerRequest, @RequestHeader("authorization") final String authorization, @PathVariable("questionId") final long questionId) throws InvalidQuestionException, AuthorizationFailedException {
 
+    @RequestMapping(method = RequestMethod.POST, path = "/question/{questionId}/answer/create", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<AnswerResponse> createAnswer(final AnswerRequest answerRequest, @RequestHeader("authorization") final String authorization, @PathVariable("questionId") final long questionId) throws InvalidQuestionException, AuthorizationFailedException {
         final AnswerEntity answerEntity = new AnswerEntity();
         answerEntity.setUuid(UUID.randomUUID().toString());
         answerEntity.setAns(answerRequest.getAnswer());
+
         final AnswerEntity createdAnswerEntity = answerBusinessService.createAnswer(answerEntity, authorization, questionId);
         AnswerResponse answerResponse =  new AnswerResponse().id(createdAnswerEntity.getUuid()).status("ANSWER CREATED");
 
