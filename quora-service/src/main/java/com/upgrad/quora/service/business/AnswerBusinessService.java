@@ -30,17 +30,21 @@ public class AnswerBusinessService {
     @Transactional(propagation = Propagation.REQUIRED)
     public AnswerEntity createAnswer(AnswerEntity answerEntity, final String authorization, final String questionId) throws AuthorizationFailedException, InvalidQuestionException {
         UserAuthEntity userAuthEntity = userDao.getUserByAccessToken(authorization);
+
         if (userAuthEntity == null) {
             throw new AuthorizationFailedException("ATHR-001", "User has not signed in");
         } else if (userAuthEntity.getLogout_at() != null) {
             throw new AuthorizationFailedException("ATHR-002", "User is signed out.Sign in first to post an answer");
         }
+
         QuestionEntity questionEntity = questionDao.getQuestionById(questionId);
         if (questionEntity == null) {
             throw new InvalidQuestionException("QUES-001", "The question entered is invalid");
         }
+
         answerEntity.setQuestion(questionEntity);
         answerEntity.setUser(userAuthEntity.getUser());
+
         return answerDao.createAnswer(answerEntity);
     }
 
@@ -51,10 +55,12 @@ public class AnswerBusinessService {
         } else if (userAuthEntity.getLogout_at() != null) {
             throw new AuthorizationFailedException("ATHR-002", "User is signed out.Sign in first to get the answers");
         }
+
         QuestionEntity questionEntity = questionDao.getQuestionById(questionId);
         if (questionEntity == null) {
             throw new InvalidQuestionException("QUES-001", "The question with entered uuid whose details are to be seen does not exist");
         }
+
         return answerDao.getAllAnswersToQuestion(questionId);
 
     }
@@ -79,6 +85,7 @@ public class AnswerBusinessService {
         if (answerEntity == null) {
             throw new AnswerNotFoundException("ANS-001", "Entered answer uuid does not exist");
         }
+
         if (userAuthTokenEntity.getUser().getRole().equals("admin") || answerEntity.getUser().getUuid().equals(userAuthTokenEntity.getUser().getUuid())) {
             return answerDao.deleteAnswer(answerId);
         } else {
@@ -96,19 +103,21 @@ public class AnswerBusinessService {
         } else if (userAuthEntity.getLogout_at() != null) {
             throw new AuthorizationFailedException("ATHR-002", "User is signed out.Sign in first to edit an answer");
         }
+
         AnswerEntity answerEntity = answerDao.getAnswerById(answerId);
         if (answerEntity == null) {
             throw new AnswerNotFoundException("ANS-001", "Entered answer uuid does not exist");
         }
+
         if (!answerEntity.getUser().getUuid().equals(userAuthEntity.getUser().getUuid())) {
             throw new AuthorizationFailedException("ATHR-003", "Only the answer owner can edit the answer");
         }
+
         answerEntity.setAns(editedAns);
         answerDao.updateAnswer(answerEntity);
+
         return answerEntity;
     }
-
-
 }
 
 
