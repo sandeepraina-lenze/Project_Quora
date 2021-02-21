@@ -31,7 +31,7 @@ public class UserController {
 
 
     @RequestMapping(method = RequestMethod.POST, path = "/user/signup", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<SignupUserResponse> signup(final SignupUserRequest signupUserRequest) throws SignUpRestrictedException, SignUpRestrictedException {
+    public ResponseEntity<SignupUserResponse> signUp(final SignupUserRequest signupUserRequest) throws SignUpRestrictedException, SignUpRestrictedException {
 
         final UserEntity userEntity = new UserEntity();
 
@@ -48,15 +48,15 @@ public class UserController {
         userEntity.setRole("nonadmin");
         userEntity.setContactnumber(signupUserRequest.getContactNumber());
 
-        final UserEntity createdUserEntity = userBusinessService.signup(userEntity);
+        final UserEntity createdUserEntity = userBusinessService.signUp(userEntity);
         SignupUserResponse userResponse = new SignupUserResponse().id(createdUserEntity.getUuid()).status("USER SUCCESSFULLY REGISTERED");
         return new ResponseEntity<SignupUserResponse>(userResponse, HttpStatus.CREATED);
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/user/signout", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<SignoutResponse> signout(@RequestHeader("authorization") final String accessToken) throws SignOutRestrictedException, SignOutRestrictedException {
+    public ResponseEntity<SignoutResponse> signOut(@RequestHeader("authorization") final String accessToken) throws SignOutRestrictedException, SignOutRestrictedException {
 
-        UserAuthEntity userAuthEntity = userBusinessService.signout(accessToken);
+        UserAuthEntity userAuthEntity = userBusinessService.signOut(accessToken);
         UserEntity userEntity = userAuthEntity.getUser();
 
         SignoutResponse signoutResponse = new SignoutResponse().id(userEntity.getUuid())
@@ -65,14 +65,14 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/user/signin", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<SigninResponse> signin(@RequestHeader("authorization") final String authorization) throws AuthenticationFailedException, AuthenticationFailedException {
+    public ResponseEntity<SigninResponse> signIn(@RequestHeader("authorization") final String authorization) throws AuthenticationFailedException, AuthenticationFailedException {
         String[] decodeAuthorization = authorization.split("Basic ");
 
         byte[] decode = Base64.getDecoder().decode(decodeAuthorization[1]);
         String decodedText = new String(decode);
         String[] decodedArray = decodedText.split(":");
 
-        UserAuthEntity userAuthToken = userBusinessService.sigin(decodedArray[0], decodedArray[1]);
+        UserAuthEntity userAuthToken = userBusinessService.sigIn(decodedArray[0], decodedArray[1]);
 
         UserEntity user = userAuthToken.getUser();
 

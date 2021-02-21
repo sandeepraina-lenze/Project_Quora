@@ -11,12 +11,12 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class UserProfileBussinessService {
+public class AdminBusinessService {
     @Autowired
-    UserDao userDao;
+    private UserDao userDao;
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public UserEntity UserProfileEntity(final String userId, final  String accessToken) throws AuthorizationFailedException, UserNotFoundException {
+    public UserEntity UserDelete(final String userId, final  String accessToken) throws AuthorizationFailedException, UserNotFoundException {
         UserAuthEntity userAuthEntity = userDao.getUserByAccessToken(accessToken);
         UserEntity userEntity = userAuthEntity.getUser();
 
@@ -25,13 +25,18 @@ public class UserProfileBussinessService {
         }
 
         if (userAuthEntity != null && userAuthEntity.getLogout_at() != null) {
-            throw new AuthorizationFailedException("ATHR-002", "User is signed out.Sign in first to get user details");
+            throw new AuthorizationFailedException("ATHR-002", "User is signed out");
         }
 
-        if (userAuthEntity != null && userAuthEntity.getLogout_at() != null) {
+        if (userEntity != null && userEntity.getRole().equals("nonadmin")) {
+            throw new AuthorizationFailedException("ATHR-003", "Unauthorized Access, Entered user is not an admin");
+        }
+
+        if (userEntity.getUuid() != userId) {
             throw new UserNotFoundException("USR-001", "User with entered uuid does not exist");
         }
 
+        userDao.userDelete(userEntity);
         return userEntity;
     }
 }
