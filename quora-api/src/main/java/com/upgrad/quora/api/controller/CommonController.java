@@ -17,6 +17,17 @@ public class CommonController {
     @Autowired
     CommonBussinessService commonBussinessService;
 
+    /**
+     * This api endpoint to fecth the details of the user
+     *
+     * @RequestHeader accessToken - access token of the signed in user in authorization request header
+     * @PathVariable userId - uuid of the corresponding user
+     *
+     * @return JSON response with user uuid and message
+     *
+     * @throws AuthorizationFailedException if user is not signed-in or user is signed out or user role is non-admin
+     * @throws UserNotFoundException if user does not exist
+     * */
     @RequestMapping(method = RequestMethod.GET, path = "/userprofile/{userId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<UserDetailsResponse> userProfile(@PathVariable("userId") final String userId, @RequestHeader("authorization") final String accessToken) throws AuthorizationFailedException, UserNotFoundException {
         final UserEntity userEntity = commonBussinessService.UserProfileEntity(userId, accessToken);

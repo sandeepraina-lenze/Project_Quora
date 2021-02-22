@@ -17,6 +17,17 @@ public class AdminController {
     @Autowired
     AdminBusinessService adminBusinessService;
 
+    /**
+     * This api endpoint is used to delete a user
+     *
+     * @RequestHeader accessToken - access token of the signed in user in authorization request header
+     * @PathVariable userId - uuid of the corresponding user
+     *
+     * @return JSON response with user uuid and message
+     *
+     * @throws AuthorizationFailedException if user is not signed-in or user is signed out or user role is non-admin
+     * @throws UserNotFoundException if user does not exist
+     * */
     @RequestMapping(method = RequestMethod.DELETE, path = "/admin/user/{userId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<UserDeleteResponse> userProfile(@PathVariable("userId") final String userId, @RequestHeader("authorization") final String accessToken) throws AuthorizationFailedException, UserNotFoundException {
         final UserEntity userEntity = adminBusinessService.UserDelete(userId, accessToken);
