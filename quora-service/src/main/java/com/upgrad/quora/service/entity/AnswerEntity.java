@@ -4,6 +4,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -41,10 +43,12 @@ public class AnswerEntity implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "USER_ID")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private UserEntity user;
 
     @ManyToOne
     @JoinColumn(name = "QUESTION_ID")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private QuestionEntity question;
 
     public long getId() {

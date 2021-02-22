@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @Repository
@@ -15,6 +16,7 @@ public class AnswerDao {
 
     // create Answer for a question
     public AnswerEntity createAnswer(AnswerEntity answerEntity) {
+        answerEntity.setDate(ZonedDateTime.now());
         entityManager.persist(answerEntity);
         return answerEntity;
     }

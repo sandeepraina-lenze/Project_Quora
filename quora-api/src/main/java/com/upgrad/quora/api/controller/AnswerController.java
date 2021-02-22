@@ -26,7 +26,7 @@ public class AnswerController {
     @Autowired
     private QuestionDao questionDao;
 
-    @RequestMapping(method = RequestMethod.POST, path = "/question/{questionId}/answer/create", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(method = RequestMethod.POST, path = "/question/{questionId}/answer/create", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<AnswerResponse> createAnswer(final AnswerRequest answerRequest, @RequestHeader("authorization") final String authorization, @PathVariable("questionId") final String questionId) throws InvalidQuestionException, AuthorizationFailedException {
 
         final AnswerEntity answerEntity = new AnswerEntity();
@@ -48,7 +48,6 @@ public class AnswerController {
      *                                      ATHR-001 - if User has not signed in. ATHR-002 if the User is signed out.
      * @throws InvalidQuestionException     throws when question is not available
      */
-
     @RequestMapping(method = RequestMethod.GET, path = "/answer/all/{questionId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<List<AnswerDetailsResponse>> getAllAnswersToQuestion(@PathVariable("questionId") String questionId, @RequestHeader("authorization") final String authorization) throws AuthorizationFailedException, InvalidQuestionException {
         List<AnswerEntity> answers = answerBusinessService.getAllAnswersToQuestion(questionId, authorization);
@@ -56,7 +55,7 @@ public class AnswerController {
 
         QuestionEntity questionEntity = questionDao.getQuestionById(questionId);
         for (AnswerEntity answerEntity : answers) {
-            if (answerEntity.getQuestion().equals(questionDao.getQuestionById(questionId))) {
+            if (answerEntity.getQuestion().getUuid().equals(questionEntity.getUuid())) {
                 AnswerDetailsResponse answerDetailsResponse = new AnswerDetailsResponse();
                 answerDetailsResponse.setId(answerEntity.getUuid());
                 answerDetailsResponse.setQuestionContent(answerEntity.getQuestion().getContent());
@@ -66,8 +65,6 @@ public class AnswerController {
         }
         return new ResponseEntity<List<AnswerDetailsResponse>>(answerDetailsResponses, HttpStatus.OK);
     }
-    //delete a answer using answerId
-
 
     @RequestMapping(method = RequestMethod.DELETE, path = "/answer/delete/{answerId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<AnswerDeleteResponse> deleteAnswer(@PathVariable("answerId") String answerId, @RequestHeader("authorization") final String authorization) throws AuthorizationFailedException, AnswerNotFoundException {
