@@ -14,20 +14,34 @@ public class AnswerDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    // create Answer for a question
+    /**
+     * Creates new answer entity in database
+     *
+     * @param answerEntity entity to be persisted in database.
+     * @return persisted entity
+     */
     public AnswerEntity createAnswer(AnswerEntity answerEntity) {
         answerEntity.setDate(ZonedDateTime.now());
         entityManager.persist(answerEntity);
         return answerEntity;
     }
 
-    //fetch all the answers to the question using questionId of question
+    /**
+     * Gets all answers for the question
+     *
+     * @param questionId - question id to get all answers
+     * @return list of answer entities of the question
+     */
     public List<AnswerEntity> getAllAnswersToQuestion(final String questionId) {
         return entityManager.createNamedQuery("getAllAnswersToQuestion", AnswerEntity.class).getResultList();
     }
-    // Fetches an answer from DB based on the answerId
 
-
+    /**
+     * Gets an answer from the database with id
+     *
+     * @param answerId - id of answer
+     * @return answer entity of id
+     */
     public AnswerEntity getAnswerById(final String answerId) {
         try {
             return entityManager.createNamedQuery("getAnswerById", AnswerEntity.class).setParameter("uuid", answerId).getSingleResult();
@@ -35,7 +49,6 @@ public class AnswerDao {
             return null;
         }
     }
-
 
     /**
      * Delete a answer by given answerId from the DB.

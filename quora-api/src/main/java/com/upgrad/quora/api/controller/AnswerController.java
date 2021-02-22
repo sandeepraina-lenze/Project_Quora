@@ -26,6 +26,16 @@ public class AnswerController {
     @Autowired
     private QuestionDao questionDao;
 
+    /**
+     * createAnswer - creates new answer for the question
+     *
+     * @param answerRequest - request model for new answer of a question
+     * @param questionId - question id for which the answer is posted
+     * @param authorization - authorization token of user
+     * @return response entity of answer response
+     * @throws AuthorizationFailedException throws when authorization failed
+     * @throws InvalidQuestionException throws when question is not available
+     */
     @RequestMapping(method = RequestMethod.POST, path = "/question/{questionId}/answer/create", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<AnswerResponse> createAnswer(final AnswerRequest answerRequest, @RequestHeader("authorization") final String authorization, @PathVariable("questionId") final String questionId) throws InvalidQuestionException, AuthorizationFailedException {
 
@@ -66,6 +76,15 @@ public class AnswerController {
         return new ResponseEntity<List<AnswerDetailsResponse>>(answerDetailsResponses, HttpStatus.OK);
     }
 
+    /**
+     * deleteAnswer - deletes the answer for the question
+     *
+     * @param answerId - answer id to be deleted
+     * @param authorization - authorization token of user
+     * @return response entity of answer delete response
+     * @throws AuthorizationFailedException throws when authorization failed
+     * @throws AnswerNotFoundException throws when answer is not available
+     */
     @RequestMapping(method = RequestMethod.DELETE, path = "/answer/delete/{answerId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<AnswerDeleteResponse> deleteAnswer(@PathVariable("answerId") String answerId, @RequestHeader("authorization") final String authorization) throws AuthorizationFailedException, AnswerNotFoundException {
         AnswerEntity answerEntity = answerBusinessService.deleteAnswer(answerId, authorization);
