@@ -118,5 +118,3 @@ public class AnswerBusinessService {
         return answerEntity;
     }
 }
-
-
