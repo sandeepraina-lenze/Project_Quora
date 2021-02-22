@@ -121,8 +121,4 @@ public class UserDao {
     public void userDelete(final UserEntity deleteUserEntity) {
         entityManager.remove(deleteUserEntity);
     }
-
-
-
-
 }

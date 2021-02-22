@@ -62,7 +62,6 @@ public class AnswerBusinessService {
         }
 
         return answerDao.getAllAnswersToQuestion(questionId);
-
     }
 
     /**
