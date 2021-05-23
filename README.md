@@ -11,9 +11,9 @@
     1.Make a databse name "quora" in you postgresSQL server.
 
     2.Modify the database user and password in following files
-        A) ` quora-api\src\main\resources\application.yaml `
+        A)quora-api\src\main\resources\application.yaml
         B)quora-db\\src\\main\\resources\\config\\localhost.properties
 
-    3.Build the project in the main directory of the project by running the command ` mvn clean install `
+    3.Build the project in the main directory of the project by running the command `` mvn clean install ``
 
-    4.In order to activate the profile setup, move to quora-db folder using ` cd quora-db ` command in the terminal and then run ` mvn clean install -Psetup ` command to activate the profile setup. 
+    4.In order to activate the profile setup, move to quora-db folder using `` cd quora-db `` command in the terminal and then run ``mvn clean install -Psetup`` command to activate the profile setup. 
