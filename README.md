@@ -7,16 +7,14 @@
   * User Controller
 
  ### To run the file on your local machine, follow the given steps: ###
-
-    > Make a databse name *quora* in you postgresSQL server.
-
-    > Modify the database user and password in following files
+ 
+ > Make a databse name *quora* in you postgresSQL server.
+ > Modify the database user and password in following files : 
         * quora-api\src\main\resources\application.yaml
         * quora-db\\src\\main\\resources\\config\\localhost.properties
+ > Build the project in the main directory of the project by running the command 
+ ``mvn clean install``
 
-    > Build the project in the main directory of the project by running the command 
-    `mvn clean install`
-
-    > In order to activate the profile setup 
-     move to quora-db folder using `cd quora-db` command in the terminal 
-     run `mvn clean install -Psetup` command to activate the profile setup. 
+ > In order to activate the profile setup 
+     * move to quora-db folder using ``cd quora-db`` command in the terminal 
+     run ``mvn clean install -Psetup`` command to activate the profile setup. 
